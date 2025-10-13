@@ -14,6 +14,30 @@ namespace BibliotecaPessoal.Controllers
         }
 
         [HttpGet]
+        public IActionResult Cadastrar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Cadastrar([FromForm] UsuarioCadastrarModelDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                var Resultado = await _usuarioService.Cadastrar(model);
+
+                if (Resultado == true)
+                {
+                    return RedirectToAction("Login", "Usuario");
+                }
+
+                return RedirectToAction("Cadastrar", model);
+
+            }
+            return View(model);
+        }
+
+        [HttpGet]
         public IActionResult Login()
         {
             return View();

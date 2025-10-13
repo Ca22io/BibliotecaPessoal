@@ -7,5 +7,6 @@ namespace BibliotecaPessoal.Service
         Task<bool> Login(LoginModelDto model);
         Task Logout();
 
+        Task<bool> Cadastrar(UsuarioCadastrarModelDto model);
     }
 }
