@@ -1,5 +1,6 @@
 
-<img width="1024" height="250" alt="BibliotecaPessoal - H" src="https://github.com/user-attachments/assets/994bdbad-87dd-4b54-a353-e5fd1914f06d" />
+<img width="1024" height="250" alt="Biblioteca Pessoal - H" src="https://github.com/user-attachments/assets/8fb01eef-1684-490b-9b54-679be6893769" />
+
 
 <div align="Center">
   <h1>Sistema de Gerenciamento de Biblioteca Pessoal</h1>
@@ -9,7 +10,7 @@
 </div>
 
 <ul>
-  <li><h3> ⚠️O Problema Real: </h3></li>
+  <li><h3> 📢 O Problema Real: </h3></li>
   <p>
     Ajudar usuários a catalogar os livros que possuem, registrar empréstimos para amigos e manter uma lista de desejos.
   </p>
