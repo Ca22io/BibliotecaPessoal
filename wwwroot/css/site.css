@@ -1,0 +1,24 @@
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  transition: all 0.3s;
+}
+
+#sidebar.toggled {
+  margin-left: -250px;
+}
+
+#content {
+  width: 100%;
+  transition: all 0.3s;
+  margin-left: 250px;
+}
+
+#content.toggled {
+  margin-left: 0;
+}
+
+.toggle-btn {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
