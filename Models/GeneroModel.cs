@@ -9,5 +9,5 @@ namespace BibliotecaPessoal.Models
 
         [StringLength(100), Required]
         public required string NomeGenero { get; set; }
-    }
+    } 
 }
