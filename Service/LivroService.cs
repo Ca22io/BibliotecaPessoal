@@ -2,6 +2,7 @@ using AutoMapper;
 using BibliotecaPessoal.Data;
 using BibliotecaPessoal.Dto;
 using BibliotecaPessoal.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BibliotecaPessoal.Service
@@ -9,6 +10,7 @@ namespace BibliotecaPessoal.Service
     public class LivroService : ILivroService
     {
         private readonly IMapper _mapper;
+
 
         private readonly ApplicationDbContext _context;
 
@@ -18,7 +20,7 @@ namespace BibliotecaPessoal.Service
             _mapper = mapper;
         }
 
-        public async Task<bool> AdicionarLivro(LivroDto Livro)
+        public async Task<bool> CadastrarLivro(LivroDto Livro)
         {
             var ConverterLivro = _mapper.Map<LivroModel>(Livro);
 
@@ -62,8 +64,9 @@ namespace BibliotecaPessoal.Service
             return _mapper.Map<LivroDto>(Livro);
         }
 
-        public async Task<IEnumerable<LivroDto>> ObterTodosLivros(string IdUsuario)
+        public async Task<IEnumerable<LivroDto>> ObterTodosLivros(int IdUsuario)
         {
+            
             var Livros = await _context.Livros.AsNoTracking().Where(x => x.IdUsuario == IdUsuario).ToListAsync();
 
             return _mapper.Map<IEnumerable<LivroDto>>(Livros);

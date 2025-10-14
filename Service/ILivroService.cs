@@ -4,7 +4,7 @@ namespace BibliotecaPessoal.Service
 {
     public interface ILivroService
     {
-        Task<bool> AdicionarLivro(LivroDto Livro);
+        Task<bool> CadastrarLivro(LivroDto Livro);
 
         Task<bool> AtualizarLivro(LivroDto Livro);
 
@@ -12,7 +12,7 @@ namespace BibliotecaPessoal.Service
 
         Task<LivroDto> ObterLivroPorId(int IdLivro, int IdUsuario);
 
-        Task<IEnumerable<LivroDto>> ObterTodosLivros(string IdUsuario);
+        Task<IEnumerable<LivroDto>> ObterTodosLivros(int IdUsuario);
 
     }
 }

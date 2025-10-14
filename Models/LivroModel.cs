@@ -15,18 +15,18 @@ namespace BibliotecaPessoal.Models
         [StringLength(100), Required]
         public required string Autor { get; set; }
 
-        [StringLength(50), Required]
+        [StringLength(50)]
         public string? CapaUrl { get; set; }
 
         [ForeignKey("Genero"), Required]
         public required int IdGenero { get; set; }
 
         [ForeignKey("Usuario"), Required]
-        public required string IdUsuario { get; set; }
+        public required int IdUsuario { get; set; }
 
         public GeneroModel? Genero { get; set; }
 
-        public IdentityUser? Usuario { get; set; }
+        public UsuarioModel? Usuario { get; set; }
 
     }
 }

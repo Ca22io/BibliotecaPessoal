@@ -1,0 +1,58 @@
+@using BibliotecaPessoal.Dto
+@{
+    ViewData["Title"] = "Cadastrar Livros";
+    @using System.Security.Claims
+        ViewBag.IdUsuario = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    Layout = "_Layout";
+}
+
+@model LivroDto
+
+<div class="row">
+    <div class="col-md-6 offset-md-3 mt-5">
+        <h1 class="text-center">@ViewData["Title"]</h1>
+        <hr />
+        <form asp-action="CadastrarLivro" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="IdUsuario" value="@ViewBag.IdUsuario" />
+
+            <div class="form-group mb-3">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Autor" class="control-label"></label>
+                <input asp-for="Autor" class="form-control" />
+                <span asp-validation-for="Autor" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label">Capa do Livro</label>
+                <input type="file" name="capaArquivo" class="form-control" accept="image/*" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="IdGenero" class="control-label"></label>
+                <select asp-for="IdGenero" class="form-control">
+                    <option value="">-- Selecione um Gênero --</option>
+                    @if (ViewBag.Generos != null)
+                    {
+                        foreach (var g in ViewBag.Generos)
+                        {
+                            <option value="@g.Id">@g.NomeGenero</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="IdGenero" class="text-danger"></span>
+            </div>
+
+            <div class="form-group text-center">
+                <input type="submit" value="Cadastrar" class="btn btn-primary px-4" />
+                <a asp-action="Index" class="btn btn-secondary px-5">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>

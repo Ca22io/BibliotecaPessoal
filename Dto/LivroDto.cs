@@ -12,6 +12,6 @@ namespace BibliotecaPessoal.Dto
 
         public required int IdGenero { get; set; }
 
-        public required string IdUsuario { get; set; }
+        public required int IdUsuario { get; set; }
     }
 }
