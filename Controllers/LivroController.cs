@@ -20,5 +20,12 @@ namespace BibliotecaPessoal.Controllers
             var livros = await _livroService.ObterTodosLivros(IdUsuario);
             return View(livros);
         }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult CadastrarLivro()
+        {
+            return View();
+        }
     }
 }
