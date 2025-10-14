@@ -1,6 +1,7 @@
 using BibliotecaPessoal.Service;
 using BibliotecaPessoal.Dto;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BibliotecaPessoal.Controllers
 {
@@ -36,11 +37,77 @@ namespace BibliotecaPessoal.Controllers
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
 
-                // Retorna a View com os erros do Identity
                 return View(model);
 
             }
             return View(model);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> AtualizarCadastro(int id)
+        {
+            var usuario = await _usuarioService.ObterUsuarioPorId(id);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            return View(usuario);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AtualizarCadastro([FromForm] UsuarioAtualizarModelDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                var Resultado = await _usuarioService.AtualizarCadastro(model);
+
+                if (Resultado.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                foreach (var error in Resultado.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+                return View(model);
+
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult ExcluirUsuario()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> ExcluirUsuario(int Id)
+        {
+            var Resultado = await _usuarioService.ExcluirUsuario(Id);
+
+            if (Resultado.Succeeded)
+            {
+                return RedirectToAction("Login");
+            }
+
+            foreach (var error in Resultado.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return View();
         }
 
         [HttpGet]
@@ -84,6 +151,7 @@ namespace BibliotecaPessoal.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _usuarioService.Logout();

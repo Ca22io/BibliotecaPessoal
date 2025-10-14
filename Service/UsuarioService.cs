@@ -40,5 +40,47 @@ namespace BibliotecaPessoal.Service
 
             return Resultado;
         }
+
+        public async Task<UsuarioAtualizarModelDto> ObterUsuarioPorId(int Id)
+        {
+            var usuario = await _userManager.FindByIdAsync(Id.ToString());
+
+            if (usuario == null)
+            {
+                return null;
+            }
+
+            return _mapper.Map<UsuarioAtualizarModelDto>(usuario);
+        }
+
+        public async Task<IdentityResult> AtualizarCadastro(UsuarioAtualizarModelDto model)
+        {
+            var usuario = await _userManager.FindByEmailAsync(model.Email);
+
+            if (usuario == null)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "Usuário não encontrado." });
+            }
+
+            usuario.NomeCompleto = model.NomeCompleto;
+            usuario.Email = model.Email;
+            usuario.UserName = model.Email;
+
+            return await _userManager.UpdateAsync(usuario);
+        }
+        
+        public async Task<IdentityResult> ExcluirUsuario(int Id)
+        {
+            var usuario = await _userManager.FindByIdAsync(Id.ToString());
+
+            if (usuario == null)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "Usuário não encontrado." });
+            }
+
+            await _signInManager.SignOutAsync();
+
+            return await _userManager.DeleteAsync(usuario);
+        }
     }
 }

@@ -1,0 +1,42 @@
+@model BibliotecaPessoal.Dto.UsuarioAtualizarModelDto
+@{
+    ViewData["Title"] = "Atualização";
+    Layout = "_LayoutSecundario";
+}
+            <div class="col-md-7 col-lg-5">
+                <div class="card shadow-lg" style="border-radius: 1rem;">
+                    <div class="card-body p-5">
+
+                        <h4 class="fw-bold mb-2 text-uppercase text-center">Atualizar Cadastro</h4>
+                        <p class="text-white-50 mb-3 text-center">Por favor, preencha os dados para atualizar sua conta!</p>
+
+                        <form asp-action="AtualizarCadastro" method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+
+                            <input type="hidden" asp-for="Id" />
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label" asp-for="NomeCompleto">Nome Completo</label>
+                                <input type="text" asp-for="NomeCompleto" class="form-control form-control-lg" required />
+                                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <label class="form-label" asp-for="Email">Email</label>
+                                <input type="email" asp-for="Email" class="form-control form-control-lg" required />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-outline form-white mb-4">
+                                <a class="text-danger text-decoration-none" asp-action="ExcluirUsuario">Ecluir conta</a>
+                            </div>
+
+                            <div class="d-flex mt-4 align-items-center justify-content-center gap-4">
+                                <a asp-controller="Home" asp-action="Index" class="btn btn-light btn-lg px-5">Voltar</a>
+                                <button class="btn btn-success btn-lg px-5" type="submit">Salvar</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
