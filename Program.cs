@@ -36,6 +36,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<ILivroService, LivroService>();
 
 builder.Services.AddControllersWithViews();
 

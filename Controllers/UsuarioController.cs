@@ -125,7 +125,7 @@ namespace BibliotecaPessoal.Controllers
 
                 if (Resultado.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Livro");
                 }
 
                 switch (Resultado)

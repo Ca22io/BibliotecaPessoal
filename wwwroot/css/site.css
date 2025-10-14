@@ -76,3 +76,10 @@
         .sidebar-header {
             border-bottom-color: #343a40 !important;
         }
+
+.sem-livros{
+    color: #6c757d;
+    font-size: 1.25rem;
+    font-weight: 500;
+    padding-top: 30vh;
+}

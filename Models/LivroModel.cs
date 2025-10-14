@@ -15,6 +15,9 @@ namespace BibliotecaPessoal.Models
         [StringLength(100), Required]
         public required string Autor { get; set; }
 
+        [StringLength(50), Required]
+        public string? CapaUrl { get; set; }
+
         [ForeignKey("Genero"), Required]
         public required int IdGenero { get; set; }
 
