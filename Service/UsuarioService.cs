@@ -1,27 +1,28 @@
 using AutoMapper;
 using BibliotecaPessoal.Dto;
+using BibliotecaPessoal.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace BibliotecaPessoal.Service
 {
     public class UsuarioService : IUsuarioService
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<UsuarioModel> _signInManager;
         private readonly IMapper _mapper;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<UsuarioModel> _userManager;
 
-        public UsuarioService(SignInManager<IdentityUser> signInManager, IMapper mapper, UserManager<IdentityUser> userManager)
+        public UsuarioService(SignInManager<UsuarioModel> signInManager, IMapper mapper, UserManager<UsuarioModel> userManager)
         {
             _signInManager = signInManager;
             _mapper = mapper;
             _userManager = userManager;
         }
 
-        public async Task<bool> Login(LoginModelDto model)
+        public async Task<SignInResult> Login(LoginModelDto model)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Senha, model.LembrarMe, false);
+            var Resultado = await _signInManager.PasswordSignInAsync(model.Email, model.Senha, model.LembrarMe, false);
 
-            return result.Succeeded;
+            return Resultado;
         }
 
         public async Task Logout()
@@ -29,18 +30,15 @@ namespace BibliotecaPessoal.Service
                 await _signInManager.SignOutAsync();
             }
 
-        public async Task<bool> Cadastrar(UsuarioCadastrarModelDto model)
+        public async Task<IdentityResult> Cadastrar(UsuarioCadastrarModelDto model)
         {
-            var Usuario = _mapper.Map<IdentityUser>(model);
+            var Usuario = _mapper.Map<UsuarioModel>(model);
+
+            Usuario.UserName = model.Email;
 
             var Resultado = await _userManager.CreateAsync(Usuario, model.Password);
 
-            if (Resultado.Succeeded)
-            {
-                return true;
-            }
-
-            return false;
+            return Resultado;
         }
     }
 }

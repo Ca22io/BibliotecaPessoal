@@ -26,12 +26,18 @@ namespace BibliotecaPessoal.Controllers
             {
                 var Resultado = await _usuarioService.Cadastrar(model);
 
-                if (Resultado == true)
+                if (Resultado.Succeeded)
                 {
                     return RedirectToAction("Login", "Usuario");
                 }
 
-                return RedirectToAction("Cadastrar", model);
+                foreach (var error in Resultado.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+                // Retorna a View com os erros do Identity
+                return View(model);
 
             }
             return View(model);
@@ -50,12 +56,28 @@ namespace BibliotecaPessoal.Controllers
             {
                 var Resultado = await _usuarioService.Login(model);
 
-                if (Resultado == true)
+                if (Resultado.Succeeded)
                 {
                     return RedirectToAction("Index", "Home");
                 }
 
-                return RedirectToAction("Login", model);
+                switch (Resultado)
+                {
+                    case var r when r.IsLockedOut:
+                        ModelState.AddModelError(string.Empty, "Conta bloqueada. Tente novamente mais tarde.");
+                        break;
+                    case var r when r.IsNotAllowed:
+                        ModelState.AddModelError(string.Empty, "Login não permitido. Verifique seu email.");
+                        break;
+                    case var r when r.RequiresTwoFactor:
+                        ModelState.AddModelError(string.Empty, "Autenticação de dois fatores requerida.");
+                        break;
+                    default:
+                        ModelState.AddModelError(string.Empty, "E-mail ou senha inválidos.");
+                        break;
+                }
+
+                return View(model);
 
             }
             return View(model);

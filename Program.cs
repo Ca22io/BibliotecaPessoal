@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BibliotecaPessoal.Data;
 using BibliotecaPessoal.Service;
+using BibliotecaPessoal.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,19 +13,24 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+builder.Services.AddIdentity<UsuarioModel, IdentityRole<int>>(options =>
     {
         options.Password.RequireNonAlphanumeric = false;
         options.Password.RequireUppercase = false;
         options.Password.RequireLowercase = false;
         options.User.RequireUniqueEmail = true;
         options.SignIn.RequireConfirmedAccount = false;
+        options.SignIn.RequireConfirmedAccount = false; 
+        options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ";
+        options.User.RequireUniqueEmail = true;
     })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
 
 builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 builder.Services.AddControllersWithViews();
 

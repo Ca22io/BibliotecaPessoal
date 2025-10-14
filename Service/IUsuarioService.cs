@@ -1,12 +1,12 @@
 using BibliotecaPessoal.Dto;
+using Microsoft.AspNetCore.Identity;
 
 namespace BibliotecaPessoal.Service
 {
     public interface IUsuarioService
     {
-        Task<bool> Login(LoginModelDto model);
+        Task<SignInResult> Login(LoginModelDto model);
         Task Logout();
-
-        Task<bool> Cadastrar(UsuarioCadastrarModelDto model);
+        Task<IdentityResult> Cadastrar(UsuarioCadastrarModelDto model);
     }
 }
