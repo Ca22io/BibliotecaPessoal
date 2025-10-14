@@ -26,7 +26,12 @@ builder.Services.AddIdentity<UsuarioModel, IdentityRole<int>>(options =>
     })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Usuario/Login";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+    options.SlidingExpiration = true;
+});
 
 builder.Services.AddAutoMapper(typeof(Program));
 
