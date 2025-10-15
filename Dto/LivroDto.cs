@@ -10,6 +10,8 @@ namespace BibliotecaPessoal.Dto
 
         public string? CapaUrl { get; set; }
 
+        public IFormFile? CapaArquivo { get; set; }
+
         public int IdGenero { get; set; }
 
         public int IdUsuario { get; set; }

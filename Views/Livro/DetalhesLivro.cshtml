@@ -1,0 +1,51 @@
+@{
+    ViewData["Title"] = "Detalhes do Livro";
+    Layout = "_Layout";
+}
+
+@model LivroEditarDto
+
+<div class="d-flex flex-column align-items-center justify-content-center ">
+
+    <h1>@ViewData["Title"]</h1>
+
+    <hr/>
+
+    <div class="row pt-5">
+        <div class="col-md-5 pe-5">
+            @if (!string.IsNullOrEmpty(Model.CapaUrl))
+            {
+                <img src="@Model.CapaUrl" alt="Capa do livro @Model.Titulo" style="height: 20rem; width: 15rem;" />
+            }
+            else
+            {
+                <div class="alert alert-info d-flex align-items-center justify-content-center" role="alert" style="height: 20rem; width: 15rem; margin-right: 5rem;">
+                    <p>Imagem indisponível</p>
+                </div>
+            }
+        </div>
+        <div class="col-md-7">
+            <div class="card text-start">
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Título:</strong> @Model.Titulo
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Autor:</strong> @Model.Autor
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Gênero:</strong> @Model.NomeGenero
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-3 d-flex justify-content-center gap-1">
+                <a asp-action="EditarLivro" asp-route-IdLivro="@Model.IdLivro" class="btn btn-primary">Editar</a>
+                <a asp-action="ExcluirLivro" asp-route-IdLivro="@Model.IdLivro" class="btn btn-danger">Excluir</a>
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+            </div>
+        </div>
+    </div>
+    
+</div>

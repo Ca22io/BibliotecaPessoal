@@ -4,7 +4,6 @@ using BibliotecaPessoal.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BibliotecaPessoal.Controllers
 {
@@ -26,9 +25,18 @@ namespace BibliotecaPessoal.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var livros = await _livroService.ObterTodosLivros( ObterUsuario().Result.Id );
+            var livros = await _livroService.ObterTodosLivros(ObterUsuario().Result.Id);
 
             return View(livros);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> DetalhesLivro(int IdLivro)
+        {
+            var ObterLivro = await _livroService.ObterLivroComGenero(IdLivro, ObterUsuario().Result.Id);
+
+            return View(ObterLivro);
         }
 
         [HttpGet]
@@ -90,26 +98,46 @@ namespace BibliotecaPessoal.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 var Atualizar = await _livroService.AtualizarLivro(Livro);
 
                 if (Atualizar == true)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("DetalhesLivro", new { IdLivro = Livro.IdLivro });
                 }
                 else
                 {
-                    ViewBag.Generos = ObterGeneros().Result;
-
-                    return View(Livro);
+                    return RedirectToAction("EditarLivro", new { IdLivro = Livro.IdLivro });
                 }
             }
 
-            ViewBag.Generos = await ObterGeneros();
-            
-            return View(Livro);
+            return RedirectToAction("EditarLivro", new { IdLivro = Livro.IdLivro });
 
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> ExcluirLivro(int IdLivro)
+        {
+            var ObterLivro = await _livroService.ObterLivroPorId(IdLivro, ObterUsuario().Result.Id);
+
+            return View(ObterLivro);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Excluir ([FromForm] int IdLivro)
+        {
+            var Resultado = await _livroService.ExcluirLivro(IdLivro, ObterUsuario().Result.Id);
+
+            if (Resultado)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("DetalhesLivro", new { IdLivro = IdLivro });
+        }
+        
         private async Task<UsuarioModel> ObterUsuario()
         {
             return await _userManager.GetUserAsync(User);

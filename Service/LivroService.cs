@@ -10,16 +10,39 @@ namespace BibliotecaPessoal.Service
     {
         private readonly IMapper _mapper;
 
+        private readonly IWebHostEnvironment _hostEnvironment;
+
         private readonly ApplicationDbContext _context;
 
-        public LivroService(ApplicationDbContext context, IMapper mapper)
+        public LivroService(ApplicationDbContext context, IMapper mapper, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             _mapper = mapper;
+            _hostEnvironment = hostEnvironment;
         }
 
         public async Task<bool> CadastrarLivro(LivroDto Livro)
         {
+            if (Livro.CapaArquivo != null || Livro.CapaArquivo.Length != 0)
+            {
+                 // Pasta onde as imagens serão salvas (ex: wwwroot/images/capas)
+                string uploadsFolder = Path.Combine(_hostEnvironment.WebRootPath, "images", "capas"); 
+                
+                // Garante que a pasta exista
+                if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);
+
+                // Gera um nome de arquivo único para evitar colisões
+                string nomeArquivo = Guid.NewGuid().ToString() + Path.GetExtension(Livro.CapaArquivo.FileName);
+                string caminhoCompleto = Path.Combine(uploadsFolder, nomeArquivo);
+
+                // 2. SALVAR O ARQUIVO FISICAMENTE NO SERVIDOR
+                using (var fileStream = new FileStream(caminhoCompleto, FileMode.Create)) 
+                {
+                    await Livro.CapaArquivo.CopyToAsync(fileStream);
+                }
+
+                Livro.CapaUrl = Path.Combine("/images/capas", nomeArquivo).Replace('\\', '/');
+            }
 
             var ConverterLivro = _mapper.Map<LivroModel>(Livro);
 
@@ -37,6 +60,27 @@ namespace BibliotecaPessoal.Service
 
         public async Task<bool> AtualizarLivro(LivroEditarDto Livro)
         {
+            if (Livro.CapaArquivo != null)
+            {
+                 // Pasta onde as imagens serão salvas (ex: wwwroot/images/capas)
+                string uploadsFolder = Path.Combine(_hostEnvironment.WebRootPath, "images", "capas"); 
+                
+                // Garante que a pasta exista
+                if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);
+
+                // Gera um nome de arquivo único para evitar colisões
+                string nomeArquivo = Guid.NewGuid().ToString() + Path.GetExtension(Livro.CapaArquivo.FileName);
+                string caminhoCompleto = Path.Combine(uploadsFolder, nomeArquivo);
+
+                // 2. SALVAR O ARQUIVO FISICAMENTE NO SERVIDOR
+                using (var fileStream = new FileStream(caminhoCompleto, FileMode.Create)) 
+                {
+                    await Livro.CapaArquivo.CopyToAsync(fileStream);
+                }
+
+                Livro.CapaUrl = Path.Combine("/images/capas", nomeArquivo).Replace('\\', '/');
+            }
+
             var ConverterLivro = _mapper.Map<LivroModel>(Livro);
 
             _context.Livros.Update(ConverterLivro);
@@ -53,7 +97,9 @@ namespace BibliotecaPessoal.Service
 
         public async Task<LivroDto> ObterLivroPorId(int IdLivro, int IdUsuario)
         {
-            var Livro = await _context.Livros.FindAsync(IdLivro, IdUsuario);
+            var Livro = await _context.Livros.Where(l => l.IdLivro == IdLivro && l.IdUsuario == IdUsuario)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
 
             if (Livro == null)
             {
@@ -71,9 +117,10 @@ namespace BibliotecaPessoal.Service
             return _mapper.Map<IEnumerable<LivroDto>>(Livros);
         }
 
-        public async Task<bool> RemoverLivro(int IdLivro, int IdUsuario)
+        public async Task<bool> ExcluirLivro(int IdLivro, int IdUsuario)
         {
-            var Livro = await _context.Livros.FindAsync(IdLivro, IdUsuario);
+            var Livro = await _context.Livros.Where(l => l.IdLivro == IdLivro && l.IdUsuario == IdUsuario)
+                .FirstOrDefaultAsync();
 
             if (Livro == null)
             {

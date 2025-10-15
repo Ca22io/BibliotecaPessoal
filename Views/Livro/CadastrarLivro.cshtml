@@ -1,9 +1,8 @@
-@using BibliotecaPessoal.Dto
 @{
     ViewData["Title"] = "Cadastrar";
     @using System.Security.Claims
         ViewBag.IdUsuario = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-    var generosList = ViewBag.Generos as List<BibliotecaPessoal.Dto.GeneroDto>;
+    var generosList = ViewBag.Generos as List<GeneroDto>;
     Layout = "_Layout";
 }
 
@@ -13,7 +12,7 @@
     <div class="col-md-6 offset-md-3 mt-5">
         <h1 class="text-center">@ViewData["Title"]</h1>
         <hr />
-        <form asp-action="CadastrarLivro" method="post">
+        <form asp-action="CadastrarLivro" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <input type="hidden" asp-for="IdUsuario" value="@ViewBag.IdUsuario" />

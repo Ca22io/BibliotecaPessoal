@@ -1,3 +1,4 @@
+@inject UserManager<UsuarioModel> UserManager;
 @{
     UsuarioModel? usuario = await UserManager.GetUserAsync(Context.User);
 }

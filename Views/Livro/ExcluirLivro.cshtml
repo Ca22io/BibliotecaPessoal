@@ -1,0 +1,21 @@
+@{
+    ViewData["Title"] = "Confirmar Exclusão";
+    Layout = "_Layout";
+}
+
+@model LivroDto
+
+<div class="container px-5 mx-5">
+    <div class="">
+        <h2 class="display-5">Confirmar Exclusão</h2>
+    </div>
+
+    <h3>Você tem certeza que deseja excluir o livro <span class=" text-danger">@Model.Titulo</span>?</h3>
+
+    <form asp-action="Excluir" method="post">
+        <input type="hidden" asp-for="@Model.IdLivro" />
+        
+        <button type="submit" class="btn btn-danger">Excluir</button>
+        <a class="btn btn-secondary" asp-action="DetalhesLivro" asp-route-Idlivro="@Model.IdLivro" asp-controller="Livro">Cancelar</a>
+    </form>
+</div>

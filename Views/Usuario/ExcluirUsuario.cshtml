@@ -1,8 +1,10 @@
+@inject UserManager<UsuarioModel> UserManager
+
 @{
     ViewData["Title"] = "Excluir Conta";
     Layout = "_LayoutSecundario";
 
-    UsuarioModel? usuario = await UserManager.GetUserAsync(Context.User);
+    UsuarioModel? usuario = await UserManager.GetUserAsync(User);
     int Id = usuario != null ? usuario.Id : 0;
 }
             <div class="col-md-7 col-lg-5">
@@ -18,7 +20,7 @@
                            Atenção! Esta ação é permanente e não pode ser desfeita. Todos os seus dados serão removidos.
                         </div>
 
-                        <form asp-action="ExcluirUsuario" asp-route-id="@Id" method="post">
+                        <form asp-action="ExcluirUsuario" asp-route-Id="@Id" method="post">
 
                             <div class="d-grid gap-2">
                                 <button class="btn btn-danger btn-lg" type="submit">Sim, quero excluir minha conta</button>

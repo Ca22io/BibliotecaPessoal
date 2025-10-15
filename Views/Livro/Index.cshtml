@@ -1,4 +1,3 @@
-@using BibliotecaPessoal.Dto
 @{
     ViewData["Title"] = "Livros";
 }
@@ -22,22 +21,26 @@
             @foreach (var livro in Model)
             {
                 <div class="col-md-4 col-lg-3 mb-4">
-                    <a asp-action="Details" asp-route-id="@livro.IdLivro" class="text-decoration-none text-dark">
-                        <div class="card h-100 shadow-sm">
+                    <a asp-action="DetalhesLivro" asp-route-IdLivro="@livro.IdLivro" class="text-decoration-none text-dark">
+                        <div class="card" style="width: 15rem;">
                             @if (!string.IsNullOrEmpty(livro.CapaUrl))
                             {
-                                <img src="@livro.CapaUrl" class="card-img-top" alt="Capa do @livro.Titulo" style="height: 200px; object-fit: cover;">
+                                <img src="@livro.CapaUrl" alt="Capa do livro @livro.Titulo" class="rounded-1" style="height: 22rem; width: 15rem;" />
                             }
                             else
                             {
-                                <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
-                                    <span class="text-white">Sem Imagem</span>
+                                <div>
+                                    <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 17rem; width: 15rem;">
+                                    <span class="text-white">Imagem indisponível</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <span class="card-subtitle">@livro.Titulo</span>
+                                        <p class="card-text"><small class="text-muted">Autor: @livro.Autor</small></p>
+                                    </div>
                                 </div>
+                                
                             }
-                            <div class="card-body">
-                                <h5 class="card-title">@livro.Titulo</h5>
-                                <p class="card-text"><small class="text-muted">@livro.Autor</small></p>
-                            </div>
+                            
                         </div>
                     </a>
                 </div>

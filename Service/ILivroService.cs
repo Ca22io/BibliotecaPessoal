@@ -8,7 +8,7 @@ namespace BibliotecaPessoal.Service
 
         Task<bool> AtualizarLivro(LivroEditarDto Livro);
 
-        Task<bool> RemoverLivro(int IdLivro, int IdUsuario);
+        Task<bool> ExcluirLivro(int IdLivro, int IdUsuario);
 
         Task<LivroDto> ObterLivroPorId(int IdLivro, int IdUsuario);
 
