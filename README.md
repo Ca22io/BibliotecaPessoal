@@ -51,4 +51,24 @@
 
 - <h3>👨‍👩‍👧‍👦 Cadastro e Login:</h3>
 
-<p>Todo o sistema de usuários está sendo gerenciado atraves do <b>Intity Framework</b> com customisação do usuário padrão da ferramenta. As páginas destinadas a todo essa processso possuem <b>layout</b> imdependente do restante da aplicação visando a melhor comodida das informações.</p>
+<p>Todo o sistema de usuários está sendo gerenciado atraves do <b>Intity Framework</b> com customisação do usuário padrão da ferramenta. As páginas destinadas a todo essa processso possuem <b>layout</b> imdependente do restante da aplicação visando a melhor comodida das informações, abaixo segue algumas imagens:</p>
+
+<span>Página de login</span>
+<img width="1919" height="865" alt="Captura de tela 2025-10-15 160014" src="https://github.com/user-attachments/assets/408f88a0-4508-414d-89b4-af28f217609f" />
+
+</br>
+<span>Página de cadastro</span>
+<img width="1901" height="866" alt="Captura de tela 2025-10-15 160042" src="https://github.com/user-attachments/assets/379167d9-4b8a-4c6c-b7a7-eb51fd284b5d" />
+
+</br>
+</br>
+
+<span>Página de atualização</span>
+<img width="1919" height="871" alt="Captura de tela 2025-10-15 160433" src="https://github.com/user-attachments/assets/c9db8793-7efc-4dc1-a9fc-c57a88bd8a0a" />
+
+</br>
+
+<span>Página de exclusão</span>
+<img width="1919" height="866" alt="Captura de tela 2025-10-15 160451" src="https://github.com/user-attachments/assets/5f0b8e0c-132e-4f86-90a8-2e1cba0ff06e" />
+
+
