@@ -1,22 +1,22 @@
 @using BibliotecaPessoal.Dto
 @{
-    ViewData["Title"] = "Cadastrar";
-    @using System.Security.Claims
-        ViewBag.IdUsuario = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    ViewData["Title"] = "Editar";
     var generosList = ViewBag.Generos as List<BibliotecaPessoal.Dto.GeneroDto>;
     Layout = "_Layout";
 }
 
-@model LivroDto
+@model LivroEditarDto
 
 <div class="row">
-    <div class="col-md-6 offset-md-3 mt-5">
+    <div class="col-md-6 offset-md-3 mt-5 pt-5">
         <h1 class="text-center">@ViewData["Title"]</h1>
         <hr />
-        <form asp-action="CadastrarLivro" method="post">
+        <form asp-action="EditarLivro" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <input type="hidden" asp-for="IdUsuario" value="@ViewBag.IdUsuario" />
+            <input type="hidden" asp-for="IdLivro" value="IdLivro" />
+
+            <input type="hidden" asp-for="IdUsuario" value="IdUsuario" />
 
             <div class="form-group mb-3">
                 <label asp-for="Titulo" class="control-label"></label>
@@ -51,8 +51,8 @@
             </div>
 
             <div class="form-group text-center">
-                <input type="submit" value="Cadastrar" class="btn btn-primary px-4" />
-                <a asp-action="Index" class="btn btn-secondary px-5">Voltar</a>
+                <input type="submit" value="Salvar" class="btn btn-primary px-4" />
+                <a asp-action="Index" class="btn btn-secondary px-4">Voltar</a>
             </div>
         </form>
     </div>

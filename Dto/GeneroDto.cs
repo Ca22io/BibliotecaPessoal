@@ -1,8 +1,8 @@
-namespace Biblioteca.Dto
+namespace BibliotecaPessoal.Dto
 {
     public class GeneroDto
     {
         public int Id { get; set; }
-        public string NomeGenero { get; set; }
+        public required string NomeGenero { get; set; }
     }
 }

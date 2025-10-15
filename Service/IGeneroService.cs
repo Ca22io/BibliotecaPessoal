@@ -1,4 +1,4 @@
-using Biblioteca.Dto;
+using BibliotecaPessoal.Dto;
 
 namespace BibliotecaPessoal.Service
 {

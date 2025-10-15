@@ -1,6 +1,6 @@
 namespace BibliotecaPessoal.Dto
 {
-    public class LivroDto
+    public class LivroEditarDto
     {
         public int IdLivro { get; set; }
 
@@ -9,6 +9,8 @@ namespace BibliotecaPessoal.Dto
         public string? Autor { get; set; }
 
         public string? CapaUrl { get; set; }
+
+        public string? NomeGenero { get; set;}
 
         public int IdGenero { get; set; }
 

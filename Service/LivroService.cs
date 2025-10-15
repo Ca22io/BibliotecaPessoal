@@ -2,7 +2,6 @@ using AutoMapper;
 using BibliotecaPessoal.Data;
 using BibliotecaPessoal.Dto;
 using BibliotecaPessoal.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BibliotecaPessoal.Service
@@ -10,7 +9,6 @@ namespace BibliotecaPessoal.Service
     public class LivroService : ILivroService
     {
         private readonly IMapper _mapper;
-
 
         private readonly ApplicationDbContext _context;
 
@@ -22,6 +20,7 @@ namespace BibliotecaPessoal.Service
 
         public async Task<bool> CadastrarLivro(LivroDto Livro)
         {
+
             var ConverterLivro = _mapper.Map<LivroModel>(Livro);
 
             await _context.Livros.AddAsync(ConverterLivro);
@@ -36,7 +35,7 @@ namespace BibliotecaPessoal.Service
             return false;
         }
 
-        public async Task<bool> AtualizarLivro(LivroDto Livro)
+        public async Task<bool> AtualizarLivro(LivroEditarDto Livro)
         {
             var ConverterLivro = _mapper.Map<LivroModel>(Livro);
 
@@ -86,6 +85,40 @@ namespace BibliotecaPessoal.Service
             await _context.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<LivroEditarDto> ObterLivroComGenero(int IdLivro, int IdUsuario)
+        {
+            var Livro = await _context.Livros
+                .Where(l => l.IdLivro == IdLivro && l.IdUsuario == IdUsuario)
+                .Include(g => g.Genero)
+                .Select(l => new LivroEditarDto
+                {
+                    NomeGenero = l.Genero.NomeGenero,
+                    Titulo = l.Titulo,
+                    Autor = l.Autor,
+                    CapaUrl = l.CapaUrl,
+                    IdGenero = l.IdGenero,
+                    IdLivro = l.IdLivro,
+                    IdUsuario = l.IdUsuario
+                }
+                )
+                .AsNoTracking().FirstOrDefaultAsync();
+
+            if (Livro != null)
+            {
+                return Livro;
+            }
+            else
+            {
+                return new LivroEditarDto();
+            }
+
+        }
+
+        public async Task<bool> VerificarSeExisteLivro(int IdLivro, int IdUsuario)
+        {
+            return await _context.Livros.AnyAsync(l => l.IdLivro == IdUsuario && l.IdUsuario == IdUsuario);
         }
     }
 }

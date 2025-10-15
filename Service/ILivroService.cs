@@ -6,13 +6,17 @@ namespace BibliotecaPessoal.Service
     {
         Task<bool> CadastrarLivro(LivroDto Livro);
 
-        Task<bool> AtualizarLivro(LivroDto Livro);
+        Task<bool> AtualizarLivro(LivroEditarDto Livro);
 
         Task<bool> RemoverLivro(int IdLivro, int IdUsuario);
 
         Task<LivroDto> ObterLivroPorId(int IdLivro, int IdUsuario);
 
+        Task<LivroEditarDto> ObterLivroComGenero(int IdLivro, int IdUsuario);
+
         Task<IEnumerable<LivroDto>> ObterTodosLivros(int IdUsuario);
+
+        Task<bool> VerificarSeExisteLivro(int IdLivro, int IdUsuario);
 
     }
 }
