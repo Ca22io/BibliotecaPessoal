@@ -41,12 +41,14 @@
    <li><h3>🗃️ Modelagem de Dados (Entity Framework):</h3></li>
    <ul>
      <li><b>Genero:</b> (Id, NomeGenero)</li>
-     <li><b>Livro:</b> (Id, Titulo, Autor, IdGenero, IdUsuario)</li>
+     <li><b>Livro:</b> (Id, Titulo, Autor, CapaUrl, IdGenero, IdUsuario)</li>
      <li><b>Emprestimo:</b> (Id, NomePessoa, DataEmprestimo, DataDevolucao, IdLivro)</li>
-     <li>A classe <b>ApplicationUser</b> (do Identity) será relacionada com <b>Livro</b>.</li>
+     <li>A classe <b>ApplicationUser</b> (do Identity) será relacionada com <b>Livro</b> e possui chave primaria númerica.</li>
    </ul>
 </ul>
 <!-- _______________________________________________________________________________________________ -->
+<hr>
 
+- <h3>👨‍👩‍👧‍👦 Cadastro e Login:</h3>
 
-
+<p>Todo o sistema de usuários está sendo gerenciado atraves do <b>Intity Framework</b> com customisação do usuário padrão da ferramenta. As páginas destinadas a todo essa processso possuem <b>layout</b> imdependente do restante da aplicação visando a melhor comodida das informações.</p>
