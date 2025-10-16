@@ -99,3 +99,77 @@
 <span>Excluir livro</span>
 <img width="1919" height="867" alt="Captura de tela 2025-10-16 103631" src="https://github.com/user-attachments/assets/11900d95-4101-43a9-8863-4680e802bdad" />
 
+<hr/>
+
+<h3>Guia rápido para configurar e executar o projeto localmente.</h3>
+
+## Requisitos
+- .NET SDK 8.x instalado (ex.: 8.0.x)
+- (Opcional) SQLite viewer para inspeção do arquivo de banco
+- (Opcional) dotnet-ef CLI para gerenciar migrações
+
+## Dependências NuGet (lista exata)
+- AutoMapper.Extensions.Microsoft.DependencyInjection — 12.0.1  
+- BCrypt.Net-Next — 4.0.3  
+- Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore — 8.0.18  
+- Microsoft.AspNetCore.Identity.EntityFrameworkCore — 8.0.18  
+- Microsoft.AspNetCore.Identity.UI — 8.0.18  
+- Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation — 8.0.20  
+- Microsoft.EntityFrameworkCore.Sqlite — 8.0.18  
+- Microsoft.EntityFrameworkCore.Tools — 8.0.18
+
+## Passos para configurar (Windows PowerShell / CMD)
+1. Abra o terminal no diretório do projeto:
+```bash
+cd "c:\Users\ca22i\OneDrive\Documentos\BibliotecaPessoal"
+```
+
+2. Restaurar pacotes:
+```bash
+dotnet restore
+```
+
+3. (Recomendado) Instalar/atualizar dotnet-ef:
+```bash
+dotnet tool install --global dotnet-ef --version 8.0.18
+# ou, se já instalado:
+dotnet tool update --global dotnet-ef --version 8.0.18
+```
+
+4. Aplicar migrações / criar banco:
+- Se já existem migrações:
+```bash
+dotnet ef database update
+```
+- Para criar migração inicial e aplicar:
+```bash
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
+
+5. Executar a aplicação:
+```bash
+dotnet run
+```
+A aplicação estará disponível em `https://localhost:5001` ou `http://localhost:5000` (conforme saída do `dotnet run`).
+
+## Comandos úteis para reinstalar pacotes
+(se necessário)
+```bash
+dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection --version 12.0.1
+dotnet add package BCrypt.Net-Next --version 4.0.3
+dotnet add package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore --version 8.0.18
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore --version 8.0.18
+dotnet add package Microsoft.AspNetCore.Identity.UI --version 8.0.18
+dotnet add package Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation --version 8.0.20
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 8.0.18
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 8.0.18
+```
+
+## Observações e problemas comuns
+- Erro "The view 'Index' was not found": o projeto pode tentar renderizar `Views/Home/Index.cshtml` pela rota padrão. Soluções:
+  - Restaurar a view `Views/Home/Index.cshtml`, ou
+  - Alterar a rota padrão em `Program.cs`, ou
+  - Fazer o controller retornar outro tipo de resultado (ex.: `Content`, `RedirectToAction`, etc.).
+- O arquivo `app.db` está configurado para ser copiado para saída — confirme que a connection string aponta para ele se for usá-lo.
+- Verifique se segredos sensíveis (credential/connection strings) não foram comitados — use User Secrets em desenvolvimento.
