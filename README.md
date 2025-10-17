@@ -118,12 +118,12 @@
 
 <h3>Guia rápido para configurar e executar o projeto localmente.</h3>
 
-## Requisitos
+## 🔧 Requisitos
 - .NET SDK 8.x instalado (ex.: 8.0.x)
 - (Opcional) SQLite viewer para inspeção do arquivo de banco
 - (Opcional) dotnet-ef CLI para gerenciar migrações
 
-## Dependências NuGet (lista exata)
+## 🧰 Dependências NuGet (lista exata)
 - AutoMapper.Extensions.Microsoft.DependencyInjection — 12.0.1  
 - BCrypt.Net-Next — 4.0.3  
 - Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore — 8.0.18  
@@ -134,24 +134,31 @@
 - Microsoft.EntityFrameworkCore.Tools — 8.0.18
 
 ## Passos para configurar (Windows PowerShell / CMD)
-1. Abra o terminal no diretório do projeto:
+1. A abra o terminal e clone o projeto:
 ```bash
-cd "c:\Users\ca22i\OneDrive\Documentos\BibliotecaPessoal"
+git clone https://github.com/Ca22io/BibliotecaPessoal
 ```
 
-2. Restaurar pacotes:
+2. Abra o terminal no diretório do projeto:
+Exemplo:
+
+```bash
+cd "c:\Documentos\BibliotecaPessoal"
+```
+
+3. Restaurar pacotes:
 ```bash
 dotnet restore
 ```
 
-3. (Recomendado) Instalar/atualizar dotnet-ef:
+4. (Recomendado) Instalar/atualizar dotnet-ef:
 ```bash
 dotnet tool install --global dotnet-ef --version 8.0.18
 # ou, se já instalado:
 dotnet tool update --global dotnet-ef --version 8.0.18
 ```
 
-4. Aplicar migrações / criar banco:
+5. Aplicar migrações / criar banco:
 - Se já existem migrações:
 ```bash
 dotnet ef database update
@@ -162,7 +169,7 @@ dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
-5. Executar a aplicação:
+6. Executar a aplicação:
 ```bash
 dotnet run
 ```
