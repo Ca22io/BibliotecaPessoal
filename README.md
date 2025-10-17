@@ -102,6 +102,20 @@
 
 <hr/>
 
+## 🤩 Versão mais recente: 1.0
+<p> Essa versão foi dedicada para lançar a primeira parte funcionau do projeto sendo relacioanda a todo o registro de livros da biblioteca pessoal.</p>
+
+## 🆕 Próximas features:
+
+- Implementar o registro de impréstimos.
+- Tratar erros de preenchimento de cadastro.
+- Incluir mensagens para tornar o sistema mais simpático com o usuário.
+- Adicionar recuperação de senha.
+- Tornar obrigatório a confirmação de e-mail.
+- Implementar sistema de redifinição de senha quando usuário estiver logado.
+
+<hr/>
+
 <h3>Guia rápido para configurar e executar o projeto localmente.</h3>
 
 ## Requisitos
