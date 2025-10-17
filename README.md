@@ -61,6 +61,7 @@
 <img width="1901" height="866" alt="Captura de tela 2025-10-15 160042" src="https://github.com/user-attachments/assets/379167d9-4b8a-4c6c-b7a7-eb51fd284b5d" />
 
 <br/>
+<br/>
 
 <span>Página de atualização</span>
 <img width="1919" height="871" alt="Captura de tela 2025-10-15 160433" src="https://github.com/user-attachments/assets/c9db8793-7efc-4dc1-a9fc-c57a88bd8a0a" />
