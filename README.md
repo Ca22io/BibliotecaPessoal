@@ -102,8 +102,8 @@
 
 <hr/>
 
-## 🤩 Versão mais recente: 1.0
-<p> Essa versão foi dedicada para lançar a primeira parte funcionau do projeto sendo relacioanda a todo o registro de livros da biblioteca pessoal.</p>
+## 🤩 Versão mais recente: 1.1
+<p> Essa versão foi dedicada para melhorar a segurança das contas dos uauários.</p>
 
 ## 🆕 Próximas features:
 
