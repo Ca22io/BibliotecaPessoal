@@ -103,7 +103,7 @@
 <hr/>
 
 ## 🤩 Versão mais recente: 1.1
-<p> Essa versão foi dedicada para melhorar a segurança das contas dos uauários.</p>
+<p> Essa versão foi dedicada para melhorar a segurança das contas dos usuários.</p>
 
 ## 🆕 Próximas features:
 
