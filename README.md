@@ -102,8 +102,8 @@
 
 <hr/>
 
-## 🤩 Versão mais recente: 1.0
-<p> Essa versão foi dedicada para lançar a primeira parte funcionau do projeto sendo relacioanda a todo o registro de livros da biblioteca pessoal.</p>
+## 🤩 Versão mais recente: 1.2
+<p> Essa versão foi dedicada para tornar o sistema mais amigável com o usuário, foi adicionado mensagens parcias para que os usuários tenham retorno de suas operações.</p>
 
 ## 🆕 Próximas features:
 
@@ -113,6 +113,10 @@
 - Adicionar recuperação de senha.
 - Tornar obrigatório a confirmação de e-mail.
 - Implementar sistema de redifinição de senha quando usuário estiver logado.
+
+# Versões anteriores:
+- Versão 1.1: Essa versão foi dedicada para melhorar a segurança das contas dos usuários.
+- Versão 1.0: Essa versão foi dedicada para lançar a primeira parte funcionau do projeto sendo relacioanda a todo o registro de livros da biblioteca pessoal.
 
 <hr/>
 
@@ -132,6 +136,8 @@
 - Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation — 8.0.20  
 - Microsoft.EntityFrameworkCore.Sqlite — 8.0.18  
 - Microsoft.EntityFrameworkCore.Tools — 8.0.18
+- Newtonsoft.Json - 13.0.4
+- FluentValidation.AspNetCore - 11.3.1
 
 ## Passos para configurar (Windows PowerShell / CMD)
 1. A abra o terminal e clone o projeto:
@@ -140,6 +146,7 @@ git clone https://github.com/Ca22io/BibliotecaPessoal
 ```
 
 2. Abra o terminal no diretório do projeto:
+
 Exemplo:
 
 ```bash

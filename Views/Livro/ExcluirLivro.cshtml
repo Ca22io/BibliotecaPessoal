@@ -10,6 +10,11 @@
         <h2 class="display-5">Confirmar Exclusão</h2>
     </div>
 
+    @if (TempData["Mensagem"] != null)
+    {
+        <partial name="_MensagemPartial" model='TempData["Mensagem"]' />
+    }
+
     <h3>Você tem certeza que deseja excluir o livro <span class=" text-danger">@Model.Titulo</span>?</h3>
 
     <form asp-action="Excluir" method="post">

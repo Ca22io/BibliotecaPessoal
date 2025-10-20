@@ -5,6 +5,11 @@
 
 @model LivroEditarDto
 
+@if (TempData["Mensagem"] != null)
+    {
+        <partial name="_MensagemPartial" model='TempData["Mensagem"]' />
+    }
+
 <div class="d-flex flex-column align-items-center justify-content-center ">
 
     <h1>@ViewData["Title"]</h1>

@@ -2,6 +2,7 @@ using BibliotecaPessoal.Service;
 using BibliotecaPessoal.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using BibliotecaPessoal.Models;
 
 namespace BibliotecaPessoal.Controllers
 {
@@ -29,6 +30,8 @@ namespace BibliotecaPessoal.Controllers
 
                 if (Resultado.Succeeded)
                 {
+                    TempData["Mensagem"] = MensagemPartial.Serealizar("Cadastro realizado com sucesso! Faça  login para acessar a aplicação!", TipoMensagem.Sucesso);
+
                     return RedirectToAction("Login", "Usuario");
                 }
 
@@ -37,9 +40,14 @@ namespace BibliotecaPessoal.Controllers
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
 
+                TempData["Mensagem"] = MensagemPartial.Serealizar("Erro ao Realizar o cadastro.", TipoMensagem.Erro);
+
                 return View(model);
 
             }
+
+            TempData["Mensagem"] = MensagemPartial.Serealizar("Alguma informação está incorreta.", TipoMensagem.Informacao);
+            
             return View(model);
         }
 
@@ -67,6 +75,8 @@ namespace BibliotecaPessoal.Controllers
 
                 if (Resultado.Succeeded)
                 {
+                    TempData["Mensagem"] = MensagemPartial.Serealizar("Cadastro atualizado com sucesso!", TipoMensagem.Sucesso);
+
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -75,13 +85,16 @@ namespace BibliotecaPessoal.Controllers
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
 
+                TempData["Mensagem"] = MensagemPartial.Serealizar("Erro ao atualizar cadastro.", TipoMensagem.Erro);
+
                 return View(model);
 
             }
-            else
-            {
-                return View(model);
-            }
+
+            TempData["Mensagem"] = MensagemPartial.Serealizar("Alguma informação está incorreta.", TipoMensagem.Informacao);
+
+            return View(model);
+
         }
 
         [HttpGet]
@@ -99,6 +112,8 @@ namespace BibliotecaPessoal.Controllers
 
             if (Resultado.Succeeded)
             {
+                TempData["Mensagem"] = MensagemPartial.Serealizar("Usuário excluido com sucesso.", TipoMensagem.Sucesso);
+
                 return RedirectToAction("Login");
             }
 
@@ -106,6 +121,8 @@ namespace BibliotecaPessoal.Controllers
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
+
+            TempData["Mensagem"] = MensagemPartial.Serealizar("Ocorreu um erro ao excluir o usuário.", TipoMensagem.Erro);
 
             return View();
         }
@@ -147,6 +164,9 @@ namespace BibliotecaPessoal.Controllers
                 return View(model);
 
             }
+
+            TempData["Mensagem"] = MensagemPartial.Serealizar("Alguma informação está preenchida de forma errada.", TipoMensagem.Informacao);
+
             return View(model);
         }
 
