@@ -20,11 +20,13 @@ builder.Services.AddIdentity<UsuarioModel, IdentityRole<int>>(options =>
         options.Password.RequireLowercase = false;
         options.User.RequireUniqueEmail = true;
         options.SignIn.RequireConfirmedAccount = false;
-        options.SignIn.RequireConfirmedAccount = false; 
+        options.SignIn.RequireConfirmedAccount = false;
         options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ";
         options.User.RequireUniqueEmail = true;
     })
     .AddEntityFrameworkStores<ApplicationDbContext>();
+    
+builder.Services.AddScoped<IPasswordHasher<UsuarioModel>, BCryptSenhaHasher<UsuarioModel>>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
