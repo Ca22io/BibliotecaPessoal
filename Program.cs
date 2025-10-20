@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using BibliotecaPessoal.Data;
 using BibliotecaPessoal.Service;
 using BibliotecaPessoal.Models;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,7 +43,12 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ILivroService, LivroService>();
 builder.Services.AddScoped<IGeneroService, GeneroService>();
 
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 

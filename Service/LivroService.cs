@@ -23,7 +23,7 @@ namespace BibliotecaPessoal.Service
 
         public async Task<bool> CadastrarLivro(LivroDto Livro)
         {
-            if (Livro.CapaArquivo != null || Livro.CapaArquivo.Length != 0)
+            if (Livro.CapaArquivo != null && Livro.CapaArquivo.Length != 0)
             {
                  // Pasta onde as imagens serão salvas (ex: wwwroot/images/capas)
                 string uploadsFolder = Path.Combine(_hostEnvironment.WebRootPath, "images", "capas"); 
