@@ -12,6 +12,12 @@
     <div class="col-md-6 offset-md-3 mt-5">
         <h1 class="text-center">@ViewData["Title"]</h1>
         <hr />
+
+        @if (TempData["Mensagem"] != null)
+        {
+            <partial name="_MensagemPartial" model='TempData["Mensagem"]' />
+        }
+
         <form asp-action="CadastrarLivro" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 

@@ -9,6 +9,12 @@
         <a asp-action="CadastrarLivro" class="btn btn-primary">Cadastrar Livro</a>
     </div>
 
+    @if (TempData["Mensagem"] != null)
+    {
+        <partial name="_MensagemPartial" model='TempData["Mensagem"]' />
+    }
+    
+
     @if (Model == null || !Model.Any())
     {
         <div class="text-center mt-5 sem-livros">

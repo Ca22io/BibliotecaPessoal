@@ -59,13 +59,21 @@ namespace BibliotecaPessoal.Controllers
 
                 if (Resultado)
                 {
+                    TempData["Mensagem"] = MensagemPartial.Serealizar("Livro cadastrado com sucesso", TipoMensagem.Sucesso);
+
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Ocorreu um erro ao cadastrar o livro.");
+                    TempData["Mensagem"] = MensagemPartial.Serealizar("Ocorreu um erro ao cadastrar o livro! Se perisitir entre em contato com o suporte.", TipoMensagem.Erro);
+
+                    ViewBag.Generos = ObterGeneros().Result;
+
+                    return View(Livro);
                 }
             }
+
+            TempData["Mensagem"] = MensagemPartial.Serealizar("Algo está errado, tente novamente! Se perisitir entre em contato com o suporte.", TipoMensagem.Informacao);
 
             ViewBag.Generos = ObterGeneros().Result;
 
@@ -77,12 +85,14 @@ namespace BibliotecaPessoal.Controllers
         [Authorize]
         public async Task<IActionResult> EditarLivro(int IdLivro)
         {
-            var Existencia = await _livroService.VerificarSeExisteLivro(IdLivro, ObterUsuario().Result.Id);
+            // var Existencia = await _livroService.VerificarSeExisteLivro(IdLivro, ObterUsuario().Result.Id);
 
-            if (!Existencia)
-            {
-                return RedirectToAction("Index");
-            }
+            // if (!Existencia)
+            // {
+            //     TempData["Mensagem"] = MensagemPartial.Serealizar("Livro não encontrado! Se perisitir entre em contato com o suporte.", TipoMensagem.Informacao);
+
+            //     return RedirectToAction("Index");
+            // }
 
             var Livro = await _livroService.ObterLivroComGenero(IdLivro, ObterUsuario().Result.Id);
 
@@ -103,13 +113,19 @@ namespace BibliotecaPessoal.Controllers
 
                 if (Atualizar == true)
                 {
+                    TempData["Mensagem"] = MensagemPartial.Serealizar("Livro atualizado com sucesso", TipoMensagem.Sucesso);
+
                     return RedirectToAction("DetalhesLivro", new { IdLivro = Livro.IdLivro });
                 }
                 else
                 {
+                    TempData["Mensagem"] = MensagemPartial.Serealizar("Ocorreu um erro ao atualizar o livro! Se perisitir entre em contato com o suporte.", TipoMensagem.Erro);
+
                     return RedirectToAction("EditarLivro", new { IdLivro = Livro.IdLivro });
                 }
             }
+
+            TempData["Mensagem"] = MensagemPartial.Serealizar("Algo está errado, tente novamente! Se perisitir entre em contato com o suporte.", TipoMensagem.Informacao);
 
             return RedirectToAction("EditarLivro", new { IdLivro = Livro.IdLivro });
 
@@ -132,8 +148,12 @@ namespace BibliotecaPessoal.Controllers
 
             if (Resultado)
             {
+                TempData["Mensagem"] = MensagemPartial.Serealizar("Livro excluido com sucesso!", TipoMensagem.Sucesso);
+
                 return RedirectToAction("Index");
             }
+
+            TempData["Mensagem"] = MensagemPartial.Serealizar("Ocorreu um erro ao excluir o livro! Se perisitir entre em contato com o suporte.", TipoMensagem.Erro);
 
             return RedirectToAction("DetalhesLivro", new { IdLivro = IdLivro });
         }

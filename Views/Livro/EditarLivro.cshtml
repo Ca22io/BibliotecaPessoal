@@ -7,9 +7,16 @@
 @model LivroEditarDto
 
 <div class="row">
-    <div class="col-md-6 offset-md-3 mt-5 pt-5">
+
+    @if (TempData["Mensagem"] != null)
+    {
+        <partial name="_MensagemPartial" model='TempData["Mensagem"]' />
+    }
+
+    <div class="col-md-6 offset-md-3 pt-5">
         <h1 class="text-center">@ViewData["Title"]</h1>
         <hr />
+
         <form asp-action="EditarLivro" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
