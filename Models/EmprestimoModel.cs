@@ -12,10 +12,10 @@ namespace BibliotecaPessoal.Models
         public required string NomePessoa { get; set; }
         
         [Required, DataType(DataType.Date)]
-        public required DateOnly DataEmprestimo { get; set; }
+        public required DateTime DataEmprestimo { get; set; }
 
         [DataType(DataType.Date)]
-        public DateOnly? DataDevolucao { get; set; }
+        public DateTime? DataDevolucao { get; set; }
 
         [ForeignKey("Livro"), Required]
         public required int IdLivro { get; set; }

@@ -42,6 +42,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ILivroService, LivroService>();
 builder.Services.AddScoped<IGeneroService, GeneroService>();
+builder.Services.AddScoped<IEmprestimoService, EmprestimoService>();
 
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
@@ -54,7 +55,7 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 var app = builder.Build();
 
-// app.UseExceptionHandler("/Home/Error");
+app.UseExceptionHandler("/Home/Error");
 
 app.UseStaticFiles();
 
