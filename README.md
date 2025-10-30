@@ -108,11 +108,9 @@
 ## 🆕 Próximas features:
 
 - Implementar o registro de impréstimos.
-- Tratar erros de preenchimento de cadastro.
-- Incluir mensagens para tornar o sistema mais simpático com o usuário.
 - Adicionar recuperação de senha.
 - Tornar obrigatório a confirmação de e-mail.
-- Implementar sistema de redifinição de senha quando usuário estiver logado.
+- Implementar redifinição de senha quando usuário estiver logado.
 
 # Versões anteriores:
 - Versão 1.1: Essa versão foi dedicada para melhorar a segurança das contas dos usuários.
