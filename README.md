@@ -1,4 +1,3 @@
-
 <img width="1024" height="250" alt="Biblioteca Pessoal - H" src="https://github.com/user-attachments/assets/8fb01eef-1684-490b-9b54-679be6893769" />
 
 
@@ -8,9 +7,9 @@
   ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
   <img src="https://img.shields.io/badge/.NET-8.0-blue"/>
-  <img src="https://img.shields.io/badge/ASP.NET-Framework-blue"/>
-  <img src="https://img.shields.io/badge/Entity-Framework-blue"/>
-  <img src="https://img.shields.io/badge/Identity-Framework-blue"/>
+  <img src="https://img.shields.io/badge/ASP.NET-Core-blue"/>
+  <img src="https://img.shields.io/badge/Entity%20Framework-Core-blue"/>
+  <img src="https://img.shields.io/badge/ASP.NET%20Core-Identity-blue"/>
   
 </div>
 
@@ -38,12 +37,12 @@
     <li><b>Autorização:</b> Um usuário só pode ver e gerenciar os seus próprios livros. Ele não pode, de forma alguma, acessar a biblioteca de outro usuário.</li>
    </ul>
    <!-- _______________________________________________________________________________________________ -->
-   <li><h3>🗃️ Modelagem de Dados (Entity Framework):</h3></li>
+   <li><h3>🗃️ Modelagem de Dados (Entity Framework Core):</h3></li>
    <ul>
      <li><b>Genero:</b> (Id, NomeGenero)</li>
      <li><b>Livro:</b> (Id, Titulo, Autor, CapaUrl, IdGenero, IdUsuario)</li>
      <li><b>Emprestimo:</b> (Id, NomePessoa, DataEmprestimo, DataDevolucao, IdLivro)</li>
-     <li>A classe <b>ApplicationUser</b> (do Identity) será relacionada com <b>Livro</b> e possui chave primaria númerica.</li>
+     <li>A classe <b>ApplicationUser</b> (do Identity) será relacionada com <b>Livro</b> e possui chave primária numérica.</li>
    </ul>
 </ul>
 <!-- _______________________________________________________________________________________________ -->
@@ -51,7 +50,7 @@
 
 - <h3>👨‍👩‍👧‍👦 Cadastro e Login:</h3>
 
-<p>Todo o sistema de usuários está sendo gerenciado atraves do <b>Intity Framework</b> com customisação do usuário padrão da ferramenta. As páginas destinadas a todo essa processso possuem <b>layout</b> imdependente do restante da aplicação visando a melhor comodida das informações, abaixo segue algumas imagens:</p>
+<p>Todo o sistema de usuários está sendo gerenciado através do <b>ASP.NET Core Identity</b> com customização do usuário padrão da ferramenta. As páginas destinadas a todo esse processo possuem [...]
 
 <span>Página de login</span>
 <img width="1919" height="865" alt="Captura de tela 2025-10-15 160014" src="https://github.com/user-attachments/assets/408f88a0-4508-414d-89b4-af28f217609f" />
@@ -73,8 +72,8 @@
 
 - <h3>📖 Livros:</h3>
 
-<p>O sistema permite realizar o cadastro de todos os livros que o usuário possui tendo a opção de inserir sua capa ou não, nos bastidores essa situação é tratada para que o sistema se comporte da maniera correta em cadasituação.
- Além do cadastro possui todos as opreações de atualização, exclusão e visualização das informações do mesmo, tudo isso é gerenciado pelo <b>Entity Framework</b> com o <b>SqLite</b> por se tratar de um sistema de banco de dados mais simples que atende totalmente a situação atual do projeto.
+<p>O sistema permite realizar o cadastro de todos os livros que o usuário possui, tendo a opção de inserir sua capa ou não. Nos bastidores, essa situação é tratada para que o sistema se comporte [...]
+ Além do cadastro, possui todas as operações de atualização, exclusão e visualização das informações do mesmo. Tudo isso é gerenciado pelo <b>Entity Framework Core</b> com o <b>SQLite</b> por[...]
 </p>
 
 <span>Página Inicial</span>
@@ -103,18 +102,18 @@
 <hr/>
 
 ## 🤩 Versão mais recente: 1.2
-<p> Essa versão foi dedicada para tornar o sistema mais amigável com o usuário, foi adicionado mensagens parcias para que os usuários tenham retorno de suas operações.</p>
+<p> Essa versão foi dedicada para tornar o sistema mais amigável ao usuário. Foram adicionadas mensagens parciais para que os usuários tenham retorno de suas operações.</p>
 
 ## 🆕 Próximas features:
 
-- Implementar o registro de impréstimos.
+- Implementar o registro de empréstimos.
 - Adicionar recuperação de senha.
-- Tornar obrigatório a confirmação de e-mail.
-- Implementar redifinição de senha quando usuário estiver logado.
+- Tornar obrigatória a confirmação de e-mail.
+- Implementar redefinição de senha quando o usuário estiver logado.
 
 # Versões anteriores:
 - Versão 1.1: Essa versão foi dedicada para melhorar a segurança das contas dos usuários.
-- Versão 1.0: Essa versão foi dedicada para lançar a primeira parte funcionau do projeto sendo relacioanda a todo o registro de livros da biblioteca pessoal.
+- Versão 1.0: Essa versão foi dedicada para lançar a primeira parte funcional do projeto, sendo relacionada a todo o registro de livros da biblioteca pessoal.
 
 <hr/>
 
@@ -122,7 +121,7 @@
 
 ## 🔧 Requisitos
 - .NET SDK 8.x instalado (ex.: 8.0.x)
-- (Opcional) SQLite viewer para inspeção do arquivo de banco
+- (Opcional) SQLite Viewer para inspeção do arquivo de banco
 - (Opcional) dotnet-ef CLI para gerenciar migrações
 
 ## 🧰 Dependências NuGet (lista exata)
@@ -138,7 +137,7 @@
 - FluentValidation.AspNetCore - 11.3.1
 
 ## Passos para configurar (Windows PowerShell / CMD)
-1. A abra o terminal e clone o projeto:
+1. Abra o terminal e clone o projeto:
 ```bash
 git clone https://github.com/Ca22io/BibliotecaPessoal
 ```
@@ -199,4 +198,4 @@ dotnet add package Microsoft.EntityFrameworkCore.Tools --version 8.0.18
   - Alterar a rota padrão em `Program.cs`, ou
   - Fazer o controller retornar outro tipo de resultado (ex.: `Content`, `RedirectToAction`, etc.).
 - O arquivo `app.db` está configurado para ser copiado para saída — confirme que a connection string aponta para ele se for usá-lo.
-- Verifique se segredos sensíveis (credential/connection strings) não foram comitados — use User Secrets em desenvolvimento.
+- Verifique se segredos sensíveis (credential/connection strings) não foram commitados — use User Secrets em desenvolvimento.
