@@ -1,0 +1,141 @@
+@model IEnumerable<EmprestimoDto>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Empréstimos";
+    Func<string, string> RowClass = status =>
+    {
+        return status switch
+        {
+            "Entregue" => "text-success",
+            "Emprestado" => "text-warning",
+            "Atrasado" => "text-danger",
+            _ => ""
+        };
+    };
+}
+
+<section class="container mt-4">
+    <div class="d-flex align-items-center mb-3">
+        <h2 class="m-0">Empréstimos</h2>
+        <div class="ms-auto">
+            <a class="btn btn-primary" href="@Url.Action("Create", "Emprestimo")">Novo Empréstimo</a>
+        </div>
+    </div>
+
+    <div class=" mb-3">
+        <div class="card-body">
+            <div class="row g-2 align-items-center">
+                <div class="col-auto">
+                    <div class="btn-group" role="group" aria-label="Filtros de status" id="filterGroup">
+                        <button type="button" class="btn btn-outline-primary active" data-filter="Todos">Todos</button>
+                        <button type="button" class="btn btn-outline-primary" data-filter="Entregue">Entregues</button>
+                        <button type="button" class="btn btn-outline-primary" data-filter="Emprestado">Emprestados</button>
+                        <button type="button" class="btn btn-outline-primary" data-filter="Atrasado">Atrasados</button>
+                    </div>
+                </div>
+                <div class="col">
+                    <input id="buscar" class="form-control" placeholder="Buscar por livro ou usuário..." />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Livro</th>
+                    <th>Usuário</th>
+                    <th>Data Empréstimo</th>
+                    <th>Devolução Prevista</th>
+                    <th>Status</th>
+                    <th style="width: 220px;">Ações</th>
+                </tr>
+            </thead>
+            <tbody id="emprestimosTableBody">
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var e in Model)
+                    {
+                        var status = e.Status ?? "Emprestado";
+                        var rowClass = RowClass(status);
+                        var isDelivered = status.Equals("Entregue", StringComparison.OrdinalIgnoreCase);
+                        <tr data-status="@status" class="@rowClass">
+                            <td>@e.IdLivro</td>
+                            <td>@e.NomePessoa</td>
+                            <td>@(e.DataEmprestimo.ToString("dd/MM/yyyy"))</td>
+                            <td>@(e.DataDevolucao?.ToString("dd/MM/yyyy") ?? "")</td>
+                            <td>
+                                <span class="badge @(status == "Entregue" ? "bg-success" : status == "Emprestado" ? "bg-warning text-dark" : "bg-danger")">
+                                    @status
+                                </span>
+                            </td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <form method="post" asp-action="Devolver" asp-controller="Emprestimo" asp-route-id="@e.IdEmprestimo" onsubmit="return confirm('Confirmar devolver este livro?');">
+                                        <button type="submit" class="btn btn-sm btn-success" @(isDelivered ? "disabled" : "") aria-label="Devolver" title="Devolver">
+                                            <i class="bi bi-arrow-counterclockwise"></i>
+                                        </button>
+                                    </form>
+
+                                    <a class="btn btn-sm btn-outline-primary" href="@Url.Action("Details", "Emprestimo", new { id = e.IdEmprestimo })" aria-label="Detalhes" title="Detalhes">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">Nenhum empréstimo encontrado.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        (function () {
+            const filterButtons = document.querySelectorAll('#filterGroup button');
+            const tableBody = document.getElementById('emprestimosTableBody');
+            const buscar = document.getElementById('buscar');
+
+            function applyFilter() {
+                const active = document.querySelector('#filterGroup button.active');
+                const filter = active ? active.getAttribute('data-filter') : 'Todos';
+                const query = (buscar.value || '').trim().toLowerCase();
+
+                Array.from(tableBody.querySelectorAll('tr')).forEach(tr => {
+                    // ignore empty placeholder row
+                    if (!tr.dataset.status) return;
+
+                    const status = tr.dataset.status;
+                    const text = (tr.innerText || '').toLowerCase();
+
+                    const statusMatch = filter === 'Todos' ? true : status === filter;
+                    const searchMatch = query === '' ? true : text.indexOf(query) !== -1;
+
+                    tr.style.display = (statusMatch && searchMatch) ? '' : 'none';
+                });
+            }
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    applyFilter();
+                });
+            });
+
+            buscar.addEventListener('input', applyFilter);
+
+            // initial filter
+            applyFilter();
+        })();
+    </script>
+}
