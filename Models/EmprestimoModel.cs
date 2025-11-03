@@ -17,6 +17,12 @@ namespace BibliotecaPessoal.Models
         [DataType(DataType.Date)]
         public DateTime? DataDevolucao { get; set; }
 
+        [Required]
+        public int TempoEmprestimo { get; set; }
+
+        [Required, StringLength(20)]
+        public required string Status { get; set; }
+
         [ForeignKey("Livro"), Required]
         public required int IdLivro { get; set; }
 

@@ -12,7 +12,9 @@ namespace BibliotecaPessoal.Dto
 
         public required int IdLivro { get; set; }
 
-        public string? Status { get; set; }
+        public required string Status { get; set; }
+
+        public int TempoEmprestimo { get; set; }
 
     }
 }

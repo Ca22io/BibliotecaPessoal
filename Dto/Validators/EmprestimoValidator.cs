@@ -22,6 +22,13 @@ namespace BibliotecaPessoal.Dto.Validators
                 .NotEmpty().WithMessage("O nome da pessoa é obrigatório!")
                 .MaximumLength(100).WithMessage("O nome da pessoa não pode exceder 100 caracteres.");
 
+            RuleFor(e => e.Status)
+                .NotEmpty().WithMessage("O status do empréstimo é obrigatório!")
+                .MaximumLength(20).WithMessage("O status do empréstimo não pode exceder 20 caracteres.");
+
+            RuleFor(e => e.TempoEmprestimo)
+                .NotEmpty().WithMessage("O tempo de empréstimo é obrigatório!")
+                .GreaterThan(0).WithMessage("O tempo de empréstimo deve ser maior que zero.");
         }
         
     }
